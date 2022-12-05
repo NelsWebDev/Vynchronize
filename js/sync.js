@@ -138,6 +138,15 @@ function seekTo(time) {
 // This parses the ID out of the video link
 function idParse(videoId) {
     // If user enters a full link
+    try {
+        const url = new URL(videoId);
+        if(url.hostname == "youtu.be") {
+            return url.pathname.split("/")[1]
+        }
+    }
+    catch(err) {
+        return videoId;
+    }
     if (videoId.includes("https://") || videoId.includes("http://") || videoId.includes(".com/")) {
         // Do some string processing with regex
         switch (currPlayer) {
